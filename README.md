@@ -2,29 +2,40 @@
 
 ## Announcements
 
-* **2026-02-24** — The venue has been confirmed: the course will be held in Seminarraum 119 (A3/SR 119) at Arnimallee 3 on the FUB Dahlem Campus.
-
-## About us
-
-[Christoph Spiegel](https://christophspiegel.berlin) will teach this course. He is a researcher at ZIB in Prof. Pokutta’s IOL group, working on combinatorics, optimization, machine learning, and proof formalization. [Silas Rathke](https://www.mi.fu-berlin.de/en/math/groups/geokomb/People/PhD-Students/Silas_Rathke.html) will serve as the teaching assistant. He is a Ph.D. student at FUB in Prof. Szabo’s group, focusing on extremal combinatorics and related formalization projects.
+*There are currently no Announcements.*
 
 ## General notes
 
-* This is the second time this course is being held. The structure will largely follow last year's with some additions and modifications, but is nevertheless subject to (spontaneous) change. Constructive feedback is welcomed throughout the course and afterwards.
-* The course is split into two sessions (9:30 to 12:30 and 14:00 to 17:00) each day and takes place from **Monday the 2nd of March** to **Friday the 13th of March 2026**. The course will be held in **Seminarraum 119 (A3/SR 119) at Arnimallee 3** on the FUB Dahlem Campus.
-* The course is open to everyone, including guest auditors (Gasthörer), not just those who need it for their degree. However, priority will be given to FU students who need the course as part of their ABV degree program. The course will also be offered for **Master students at the FUB** as well as as a **BMS Advanced Course** for the first time this year! For the `aktive Teilnahme', Master-level participants will be required to solve additional and more advanced problems in the exercise sessions compared to Bachelor-level students. Both Bachelor and Master-level students will be given the same **final exam on the second Friday at the end of the course**. There will be an **additional final project task for the Master-level students** that the students will be given one or two weeks time after the end of the block course to solve. The exact scope of that additional project and the format of the evaluation of it has not yet been determined but may include an in-person presentation.
-* Participants **need to bring a laptop** to do the exercises and follow along during the course and work on exercises and project work.
-* Completion of Analysis I and Linear Algebra I should provide a sufficient mathematical background, but participants should have a strong understanding of these subjects, as formal proof verification is very "unforgiving". No prior programming experience is required, but a certain "technical affinity and interest" is needed. Besides formal proof verification, you will be in contact with many other tools such as `git` and `github`, [Patrick Massot's](https://www.imo.universite-paris-saclay.fr/~patrick.massot/en/) `leanblueprint`, CI/CD in the form of `github Actions`, as well as various ML tools.
+This is the second time this course is being held. The structure will largely follow last year’s with some additions and modifications, but is nevertheless subject to (spontaneous) change. Constructive feedback is welcomed throughout the course and afterwards.
+
+### About
+
+[Christoph Spiegel](https://christophspiegel.berlin) will teach this course. He is a researcher at ZIB in Prof. Pokutta’s IOL group, working on combinatorics, optimization, machine learning, and proof formalization. [Silas Rathke](https://www.mi.fu-berlin.de/en/math/groups/geokomb/People/PhD-Students/Silas_Rathke.html) will serve as the teaching assistant. He is a Ph.D. student at FUB in Prof. Szabo’s group, focusing on extremal combinatorics and related formalization projects.
+
+### Time and venue
+
+The course takes place from **Monday the 2nd of March** to **Friday the 13th of March 2026**, split into two daily sessions (9:30–12:30 and 14:00–17:00). It will be held in **Seminarraum 119 (A3/SR 119) at Arnimallee 3** on the FUB Dahlem Campus.
+
+### Registration and credit
+
+The course is open to everyone, including guest auditors (Gasthörer), not just those who need it for their degree. Priority will be given to FU students who need the course as part of their ABV degree program. The course will also be offered for **Master students at the FUB** as well as as a **BMS Advanced Course** for the first time this year!
+
+For the `aktive Teilnahme`, Master-level participants will be required to solve additional and more advanced problems in the exercise sessions compared to Bachelor-level students. Both Bachelor and Master-level students will sit the same **final exam on the second Friday**. Master-level students will additionally receive a **small formalization project** to complete in the one or two weeks following the course. The exact scope and evaluation format has not yet been determined but may include an in-person presentation.
+
+### Background
+
+* Completion of Analysis I and Linear Algebra I should provide a sufficient mathematical background, but participants should have a strong understanding of these subjects, as formal proof verification is very "unforgiving". No prior programming experience is required, but a certain "technical affinity and interest" is needed. Besides formal proof verification, you will be in contact with many other tools such as `git` and `github`, [Patrick Massot’s](https://www.imo.universite-paris-saclay.fr/~patrick.massot/en/) `leanblueprint`, CI/CD in the form of `github Actions`, as well as various ML tools.
+* Participants **need to bring a laptop** to follow along and work on exercises.
 * The course will be **conducted in English**, but Bachelor students taking the course as part of their ABV requirements may express themselves in German if they prefer.
 
-## Setup
+### Setup
 
 We will walk through the full setup together on the first day. We will cover the following:
 
 * Setting up [Visual Studio Code](https://code.visualstudio.com).
 * Creating a **[GitHub account](https://github.com/signup)**.
 * Setting up **git**. The process varies by platform:
-  * **macOS** — `xcode-select --install` installs Apple's developer tools, which include git. [Homebrew](https://brew.sh) is not required but recommended as a general package manager.
+  * **macOS** — `xcode-select --install` installs Apple’s developer tools, which include git. [Homebrew](https://brew.sh) is not required but recommended as a general package manager.
   * **Linux** — Install git via your package manager, e.g. `sudo apt install git` on Debian/Ubuntu or `sudo pacman -S git` on Arch.
   * **Windows** — We recommend installing [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install) (Windows Subsystem for Linux) with Ubuntu, which is the officially recommended environment for Lean on Windows. Git is then installed within WSL (`sudo apt install git`). Keep your course files inside the WSL filesystem (e.g. `~/projects/`) rather than your Windows Documents folder, and open VS Code from within WSL using `code .`.
 
