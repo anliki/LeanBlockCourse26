@@ -1,0 +1,8 @@
+---
+title: Log
+nav_order: 6
+---
+
+# Course Log
+
+- Uploaded slides for `P01_Introduction` *2025-03-02*

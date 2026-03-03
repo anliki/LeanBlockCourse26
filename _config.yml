@@ -17,3 +17,4 @@ exclude:
   - LeanBlockCourse26.lean
   - LeanBlockCourse26/
   - BlockCourse/
+  - README.md
