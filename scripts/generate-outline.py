@@ -140,6 +140,20 @@ def generate() -> str:
         "The course outline is still subject to change, but will roughly be as follows.",
     ]
 
+    # Slides table (all parts with available PDFs)
+    slide_rows = []
+    for part, _ in PARTS:
+        if pdf := find_slides(part):
+            rel = pdf.relative_to(ROOT)
+            slide_rows.append(f"| {part} | [{pdf.name}]({rel}) |")
+    if slide_rows:
+        lines.append("")
+        lines.append("## Slides")
+        lines.append("")
+        lines.append("| Part | PDF |")
+        lines.append("|------|-----|")
+        lines.extend(slide_rows)
+
     for part, description in PARTS:
         lines.append("")
         lines.append("---")
@@ -147,12 +161,6 @@ def generate() -> str:
         lines.append(f"## {part}")
         lines.append("")
         lines.append(description)
-
-        # Slides
-        if pdf := find_slides(part):
-            rel = pdf.relative_to(ROOT)
-            lines.append("")
-            lines.append(f"**Slides:** [{pdf.name}]({rel})")
 
         # Sections
         sections = find_sections(part)
