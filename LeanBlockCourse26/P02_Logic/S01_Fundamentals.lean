@@ -310,7 +310,7 @@ example (P Q R : Prop) (h₂ : Q → R) : P → (Q → R) := by
 -- and the same in term mode
 example (P Q R : Prop) (h₂ : Q → R) : P → (Q → R) := fun _ => h₂
 
--- Think if it like the following python code:
+-- Think of it like the following python code:
 --
 -- ```
 -- def foo(n: int, s: str) -> str:
@@ -380,7 +380,7 @@ example (P Q : Prop) (h : P ↔ Q) : P → Q := by
 -- Without rewriting
 example (P Q : Prop) (h : P ↔ Q) : P → Q := by
   intro p
-  have p_impl_q := h.mp -- `mp`(modues ponens) is the `P → Q` direction of `P ↔ Q`
+  have p_impl_q := h.mp -- `mp` (modus ponens) is the `P → Q` direction of `P ↔ Q`
   exact p_impl_q p
 
 -- In fact, our statement is just the modus ponens of the assumption `h`
@@ -446,7 +446,7 @@ example (P Q R : Prop) (h₁ : Q ↔ P) (h₂ : Q ↔ R) : P ↔ R := by
 
 -- Example 2: Using h.symm in rewriting
 example (P Q R : Prop) (h₁ : Q ↔ P) (h₂ : Q ↔ R) : P ↔ R := by
-  let p_iff_q := h₁.symm -- note that *here*  `← h₁.` would not work
+  let p_iff_q := h₁.symm -- note that *here* `← h₁` would not work
   rw [p_iff_q]
   assumption
 
@@ -477,8 +477,8 @@ This tactic is only used around 400 times in mathlib.
 -/
 
 example (P Q : Prop) (h : Q ↔ P) (pqr : P ∧ Q ∧ P) : P ∧ Q ∧ Q := by
-  -- rw [h] -- What does this *actually* rewrite? Every ocurrence of `Q`!
-  nth_rw 2 [h] -- This however only rewrites the second ocurrence of `Q`
+  -- rw [h] -- What does this *actually* rewrite? Every occurrence of `Q`!
+  nth_rw 2 [h] -- This however only rewrites the second occurrence of `Q`
   assumption
 
 /-
@@ -498,7 +498,7 @@ example (P Q R : Prop) (h₁ : P ↔ Q) (h₂ : Q ↔ R) : P ↔ R := by
 
 example (P Q R : Prop) (h₁ : P ↔ Q) (h₂ : Q ↔ R) : P ↔ R := by
   rw [h₂.symm]
-  exact h₁ 
+  exact h₁
 
 example (P Q R : Prop) (h₁ : P ↔ Q) (h₂ : Q ↔ R) : P ↔ R := by
   rw [h₁, h₂] -- you can tab through the contents of the square brackets to see the rewrites!
@@ -507,7 +507,7 @@ example (P Q R : Prop) (h₁ : P ↔ Q) (h₂ : Q ↔ R) : P ↔ R := by
 
 -- Exercise 3.2
 -- Shows how to use `rw` to prove that if `Q` and `P` are equivalent, then
--- `P` implies `Q` (modus tollens of `↔`)
+-- `P` implies `Q` (backward direction of `↔`)
 example (P Q : Prop) (h : Q ↔ P) : P → Q := by
   rw [h] -- now we have to show `P → P`
   intro p
@@ -570,7 +570,7 @@ Some common patterns:
 - `by exact p` becomes just `p`
 - `by intro p; exact f p` becomes `fun p => f p`
 - `by intro p; exact p` becomes `fun p => p` or simply `id`
-- `by rw [h₁] at p; exact p` becomes `(h₁ ▸ p)
+- `by rw [h₁] at p; exact p` becomes `(h₁ ▸ p)`
 
 The last one only works for equality (`=`) in `h₁`, not for equivalence (`↔`).
 Note that `\t` produces the unicode symbol `▸` and that `\mapsto` produces
@@ -652,7 +652,7 @@ lemma identity_term_id (P : Prop) : P → P := id
 example : identity_term_id = identity_tactic_id := rfl
 example : identity_tactic_intro = identity_term_lambda := rfl
 
--- ... even these (despite print looking looking different)!
+-- ... even these (despite print looking different)!
 example : identity_tactic_intro = identity_tactic_id := rfl
 example : identity_term_id = identity_term_lambda := rfl
 
@@ -670,12 +670,12 @@ example (P Q R : Prop) (h₁ : Q = P) (h₂ : Q ↔ R) : P ↔ R :=
 -- do in term mode because the whole idea of modifying the goal and
 -- "arguing backwards" is at odds with functional programming:
 -- this is why tactic mode exists, to give mathematicians the
--- convenience of arguing from the back towards to assumptions.
+-- convenience of arguing from the back towards the assumptions.
 -- Behind the scenes this still gets translated into forward
 -- arguing function calls.
 
 /-
-# Exercise Block 4
+## Exercise Block B04
 
 Turn all of the previous exercises into term mode proofs.
 -/
@@ -692,7 +692,7 @@ example (P Q R : Prop) (h₁ : P → Q → R) (h₂ : P → Q) : P → R := sorr
 
 -- Exercise 4.3 (Master)
 -- Try turning this tactic mode proof into term mode, first without using
--- `#print' and then using it
+-- `#print` and then using it
 example (P Q R : Prop) (h₁ : P ↔ Q) (h₂ : Q ↔ R) : P ↔ R := by
   rw [h₁.symm] at h₂
   exact h₂
