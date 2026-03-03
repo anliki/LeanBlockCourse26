@@ -6,6 +6,9 @@ on:
     paths:
       - '*.md'
       - '_config.yml'
+      - 'lecture-slides/**'
+      - 'LeanBlockCourse26/**'
+      - 'scripts/**'
       - '.github/workflows/pages.yml'
 
 permissions:
@@ -22,6 +25,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/generate-outline.py
       - uses: actions/configure-pages@v5
       - uses: actions/jekyll-build-pages@v1
       - uses: actions/upload-pages-artifact@v3
