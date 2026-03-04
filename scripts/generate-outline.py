@@ -331,12 +331,12 @@ def format_label(ann: Announcement) -> str:
 
 
 def render_announcement(ann: Announcement) -> str:
-    """Render a single announcement as an HTML block with date above."""
+    """Render a single announcement as a compact row."""
     return (
-        f'<blockquote class="highlight">'
-        f'<p>{format_label(ann)}</p>'
-        f'<p>{inline_md_to_html(ann.body)}</p>'
-        f'</blockquote>'
+        f'<div class="announcement-item">'
+        f'{format_label(ann)} '
+        f'{inline_md_to_html(ann.body)}'
+        f'</div>'
     )
 
 
@@ -355,12 +355,36 @@ def inject_announcements() -> None:
     recent = [a for a in announcements if a.d >= cutoff]
     older = [a for a in announcements if a.d < cutoff]
 
-    parts: list[str] = []
+    style = (
+        '<style>'
+        '.announcements {'
+        '  border: 1px solid #e8e8e8; border-left: 4px solid #f0c36d;'
+        '  border-radius: 4px; margin: 1rem 0; padding: 0;'
+        '}'
+        '.announcement-item {'
+        '  padding: 0.5rem 1rem; line-height: 1.6;'
+        '}'
+        '.announcement-item + .announcement-item {'
+        '  border-top: 1px solid #f0f0f0;'
+        '}'
+        '.announcements summary {'
+        '  padding: 0.5rem 1rem; cursor: pointer; color: #586069;'
+        '  font-size: 0.9em;'
+        '}'
+        '.announcements details {'
+        '  border-top: 1px solid #e8e8e8;'
+        '}'
+        '.announcements details .announcement-item:first-child {'
+        '  border-top: none;'
+        '}'
+        '</style>'
+    )
+
+    parts: list[str] = [style, '<div class="announcements">']
 
     if recent:
         for ann in recent:
             parts.append(render_announcement(ann))
-        parts.append("")
 
     if older:
         parts.append("<details>")
@@ -369,7 +393,8 @@ def inject_announcements() -> None:
         for ann in older:
             parts.append(render_announcement(ann))
         parts.append("</details>")
-        parts.append("")
+
+    parts.append("</div>")
 
     body = "\n".join(parts)
 
