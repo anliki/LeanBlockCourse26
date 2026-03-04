@@ -108,6 +108,9 @@ always rewrite your goal to `⊥`. But that will not be helpful.
 
 Lean also inherently argues forward through type theory, so the backward
 reasoning is a tactic mode convenience layer for mathematicians.
+
+Also note that `rw [...] at ...` and `rw [...]` from P02S01 also can be
+viewed in this forward and backward arguing model, but they are non-destructive.
 -/
 
 /-
