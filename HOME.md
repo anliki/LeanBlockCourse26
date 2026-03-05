@@ -4,7 +4,11 @@ nav_order: 1
 permalink: /
 ---
 
-# Formalized Math in LEAN – FUB Block Course 2026
+# Formalized Math in LEAN
+{: .fs-9 }
+
+Block Course at the Freie Universität Berlin — March 2026
+{: .fs-6 .fw-300 }
 
 <!-- begin announcements -->
 <style>.announcements {  border: 1px solid #e8e8e8; border-left: 4px solid #f0c36d;  border-radius: 4px; margin: 1rem 0; padding: 0;}.announcement-item {  display: flex; gap: 0.5rem;  padding: 0.5rem 1rem; line-height: 1.6;}.announcement-item > .label {  flex-shrink: 0; align-self: baseline;}.announcement-item + .announcement-item {  border-top: 1px solid #f0f0f0;}.announcements summary {  padding: 0.5rem 1rem; cursor: pointer; color: #586069;  font-size: 0.9em;}.announcements details {  border-top: 1px solid #e8e8e8;}.announcements details .announcement-item:first-child {  border-top: none;}</style>
