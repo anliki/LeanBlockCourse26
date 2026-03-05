@@ -8,6 +8,7 @@ import Mathlib.Tactic.Basic
 import Mathlib.Tactic.ByContra
 import Mathlib.Tactic.Push
 import Mathlib.Tactic.NthRewrite
+import ProofGolf
 
 /-
 # Negation and Classical Logic
@@ -153,22 +154,75 @@ Related: https://www.youtube.com/watch?v=aMxcAaR0oHU
 
 -- Exercise 1.1a
 -- Prove the statement using `push_neg`
-example (P : Prop) : P → ¬¬P := by
-  sorry
+theorem nnp_of_p_exercise_push_neg (P : Prop) : P → ¬¬P := by
+  intro p
+  push_neg
+  exact p
+
+#print axioms nnp_of_p_exercise_push_neg
 
 -- Exercise 1.1b
--- Prove the statement without `push_neg`
-example (P : Prop) : P → ¬¬P := by
-  sorry
+-- Prove the statement without `push_neg` amd without classical
+-- logic, i.e., use `#print axioms` to make sure you are not
+-- dependent on any (`Classical.`) axioms!
+theorem nnp_of_p_exercise_fun (P : Prop) : P → ¬¬P := by
+  intro p
+  intro np
+  exact np p
+
+#print axioms nnp_of_p_exercise_fun
+
+theorem nnp_of_p_exercise_fun_term (P : Prop) : P → ¬¬P := fun p np => np p
+
+#print axioms nnp_of_p_exercise_fun_term
+
+theorem nnp_of_p_exercise_contradiction (P : Prop) : P → ¬¬P := by
+  intro p
+  intro np
+  contradiction
+
+#print axioms nnp_of_p_exercise_contradiction
 
 -- Exercise 1.2
 example (P Q : Prop) (p : ¬¬P) (f : P → Q) : ¬¬Q := by
-  sorry
+  push_neg
+  push_neg at p
+  exact f p
+
+example (P Q : Prop) (p : ¬¬P) (f : P → Q) : ¬¬Q := by
+  push_neg at *
+  exact f p
 
 -- Exercise 1.3
 example (P Q R : Prop) (h : P ∨ Q ∨ R → ¬(P ∧ Q ∧ R)) : (P ∨ Q) ∨ R → ¬((P ∧ Q) ∧ R) := by
-  sorry
+  sorry -- to add: elementary proof
+
+example (P Q R : Prop) (h : P ∨ Q ∨ R → ¬(P ∧ Q ∧ R)) : (P ∨ Q) ∨ R → ¬((P ∧ Q) ∧ R) := by
+  rintro ((p | q) | r)
+  all_goals
+    rintro ⟨⟨p, q⟩, r⟩
+  · exact (h (Or.inl p)) ⟨p, q, r⟩
+  · exact (h (Or.inl p)) ⟨p, q, r⟩
+  · exact (h (Or.inl p)) ⟨p, q, r⟩
+
+#golf example (P Q R : Prop) (h : P ∨ Q ∨ R → ¬(P ∧ Q ∧ R)) : (P ∨ Q) ∨ R → ¬((P ∧ Q) ∧ R) := by
+  rintro ((p | q) | r)
+  all_goals
+  rintro ⟨⟨p, q⟩, r⟩
+  exact (h (Or.inl p)) ⟨p, q, r⟩
+
+#golf example (P Q R : Prop) (h : P ∨ Q ∨ R → ¬(P ∧ Q ∧ R)) : (P ∨ Q) ∨ R → ¬((P ∧ Q) ∧ R) := by
+  rintro ((p | q) | r) <;> rintro ⟨⟨p, q⟩, r⟩ <;> exact (h (Or.inl p)) ⟨p, q, r⟩
+
+#golf example (P Q R : Prop) (h : P ∨ Q ∨ R → ¬(P ∧ Q ∧ R)) : (P ∨ Q) ∨ R → ¬((P ∧ Q) ∧ R) := by
+  push_neg at *
+  rintro _ ⟨p, q⟩
+  exact h (Or.inl p) p q
 
 -- Exercise 1.4
-example (P Q : Prop) (h : P → ¬ Q) (p : P) (q : Q) : False := by
-  sorry
+#golf example (P Q : Prop) (h : P → ¬ Q) (p : P) (q : Q) : False := by
+  suffices ¬Q by contradiction
+  exact h p
+
+#golf example (P Q : Prop) (h : P → ¬ Q) (p : P) (q : Q) : False := by
+  exact h p q
