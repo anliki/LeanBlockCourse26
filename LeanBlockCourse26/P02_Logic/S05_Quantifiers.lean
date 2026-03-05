@@ -138,7 +138,7 @@ The `ext` tactic proves function extensionality, reducing a goal `f = g`
 to proving `f x = g x` for arbitrary `x`. It is used around 11,000 times in mathlib.
 -/
 
--- This is `funext` in Lean (Init.Core); `funext_iff` (Mathlib) provides the biconditional
+-- This is `funext` in Lean (Init.Core); `funext_iff` (Init.Ext) provides the biconditional
 theorem func_ext (X Y : Type) (f g : X → Y) (h : ∀ x : X, f x = g x) : f = g := by
   ext x
   exact h x

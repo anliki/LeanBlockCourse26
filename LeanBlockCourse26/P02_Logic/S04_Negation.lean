@@ -141,7 +141,7 @@ Normalizes negated expressions by pushing negation inward:
 -/
 
 -- This is `Classical.not_not.mp` in Lean (Init.Classical)
--- Exported as `not_not.mp` by Mathlib.Logic.Basic
+-- `not_not` is the `@[simp]` alias for this, also in Init.Classical
 theorem push_neg_example (P : Prop) : ¬¬P → P := by
   push_neg
   exact id
