@@ -145,7 +145,7 @@ theorem mem_pair (t x y : α) : t ∈ ({x, y} : Set α) ↔ t = x ∨ t = y := b
 -- This is `Set.subset_def` in mathlib ...
 theorem subset_def {S T : Set α} : (S ⊆ T) = ∀ x ∈ S, x ∈ T := rfl
 
--- ... but `∀ x ∈ S` makes `x : α` and `x ∈ S` explicit, which we could avoid throgh
+-- ... but `∀ x ∈ S` makes `x : α` and `x ∈ S` explicit, which we could avoid through
 theorem subset_def_impl {S T : Set α} : (S ⊆ T) = ({x : α} → x ∈ S → x ∈ T) := rfl
 
 -- This is `Set.ssubset_def` in mathlib
@@ -230,7 +230,7 @@ example {x : α} (h₁ : S ⊆ T) (h₂ : x ∈ S) : x ∈ T := by
 example {x : α} (h₁ : S ⊆ T) (h₂ : x ∈ S) : x ∈ T := by
   rw [subset_def_impl] at h₁
   exact h₁ h₂
-  
+
 example {x : α} (h₁ : S ⊆ T) (h₂ : x ∈ S) : x ∈ T := by
   exact h₁ h₂
 
@@ -243,7 +243,7 @@ example {x : α} (R : Set α) (h₁ : S ⊆ T) (h₂ : T ⊆ R) (h₃ : x ∈ S)
   have xr : x ∈ R := h₂ x xt
   exact xr
 
-example {x : α} (R : Set α) (h₁ : S ⊆ T) (h₂ : T ⊆ R) (h₃ : x ∈ S) : x ∈ R := 
+example {x : α} (R : Set α) (h₁ : S ⊆ T) (h₂ : T ⊆ R) (h₃ : x ∈ S) : x ∈ R :=
   h₂ <| h₁ h₃
 
 example {x : α} (R : Set α) (h₁ : S ⊆ T) (h₂ : T ⊆ R) (h₃ : x ∈ S) : x ∈ R := by
@@ -263,7 +263,7 @@ example {x : α} {R : Set α} (h₁ : S ⊆ T) (h₂ : x ∈ T → x ∈ R) : x 
   fun xs => h₂ (h₁ xs)
 
 -- Exercise 1.4
--- Note that `x ∉ T` is just notation for `¬(x ∈ T)` and hence  `(x ∈ T) → False`
+-- Note that `x ∉ T` is just notation for `¬(x ∈ T)` and hence `(x ∈ T) → False`
 example (h : S ⊆ T) {x : α} (hx : x ∉ T) : x ∉ S := by
   intro xs
   exact hx (h xs)
@@ -281,25 +281,24 @@ example {R : Set α} (h₁ : S ⊂ T) (h₂ : T ⊆ R) : S ⊂ R := by
     exact c (Subset.trans h₂ r)
 
 example {R : Set α} (h₁ : S ⊂ T) (h₂ : T ⊆ R) : S ⊂ R :=
-  ⟨fun _ xs => h₂ (h₁.left xs), fun rs => h₁.right (Subset.trans h₂ rs)⟩ 
+  ⟨fun _ xs => h₂ (h₁.left xs), fun rs => h₁.right (Subset.trans h₂ rs)⟩
 
 -- Exercise 1.6 (Master)
 
 -- The empty set is the subset of any set `S` ...
-example : ∃ T, T ⊆ S := by
+example : ∃ U, U ⊆ S := by
   use ∅
   exact empty_subset S
 
-example : ∃ T, T ⊆ S := ⟨∅, empty_subset S⟩
+example : ∃ U, U ⊆ S := ⟨∅, empty_subset S⟩
 
 -- ... as is the set `S` itself
-example : ∃ T, T ⊆ S := by
+example : ∃ U, U ⊆ S := by
   use S
 
-example : ∃ T, T ⊆ S := ⟨S, by rfl⟩
+example : ∃ U, U ⊆ S := ⟨S, by rfl⟩
 
 end P03S01B01
-
 
 /-
 ## Set equality
@@ -310,7 +309,7 @@ end P03S01B01
 -- This is `Set.ext_iff` in mathlib ...
 theorem ext_iff {S T : Set α} : S = T ↔ ∀ x, x ∈ S ↔ x ∈ T := Set.ext_iff
 
--- ... and the `ext` tactic also knows about it 
+-- ... and the `ext` tactic also knows about it
 example {S T : Set α} : S = T ↔ ∀ x, x ∈ S ↔ x ∈ T := by
   constructor
   · intro st x
@@ -333,17 +332,17 @@ example {S T : Set α} : S = T ↔ ∀ x, x ∈ S ↔ x ∈ T := by
     exact h x
 
 /-
-## Side remark: extensionability axioms
+## Side remark: extensionality axioms
 
-Extensionability tell us when two types of a specific form are equal. We just
-saw set extensionability, which uses `funext` and `propext`:
+Extensionality tells us when two objects of a specific form are equal. We just
+saw set extensionality, which uses `funext` and `propext`:
 
 ```
 theorem ext {a b : Set α} (h : ∀ (x : α), x ∈ a ↔ x ∈ b) : a = b :=
   funext (fun x ↦ propext (h x))
 ```
 
-`funext` is just the exentionsionability of functions we have previously 
+`funext` is just the extensionality of functions we have previously
 already seen and used with the `ext` tactic
 
 ```
@@ -358,7 +357,7 @@ theorem funext {α : Sort u} {β : α → Sort v} {f g : (x : α) → β x}
   exact congrArg extfunApp (Quot.sound h)
 ```
 
-`propext` is extensionability of propositions, stating that `P ↔ Q` implies `P = Q`.
+`propext` is extensionality of propositions, stating that `P ↔ Q` implies `P = Q`.
 This is the only reason why we can `rw` with equivalences.
 
 ```
@@ -376,7 +375,7 @@ axiom sound : ∀ {α : Sort u} {r : α → α → Prop} {a b : α}, r a b → Q
 ## Complements
 
 For a set `S`, the complement `Sᶜ` is defined as the set of all elements of type
-`α` that are not contained in `S`. Note that lean always defines what "universe"
+`α` that are not contained in `S`. Note that Lean always defines what "universe"
 a set lives in through its type `α`, that is a complement is always well defined.
 -/
 
@@ -387,14 +386,14 @@ theorem mem_compl_iff (S : Set α) (x : α) : x ∈ Sᶜ ↔ x ∉ S := by rfl
 /-
 ## Exercise Block B02
 
-Do *not*  use or look up the statements or other theorems in mathlib, only use
+Do *not* use or look up the statements or other theorems in mathlib, only use
 named theorems that we defined in this file. Once you proved a named theorem,
 look up its actual proof in mathlib.
 -/
 
-namespace P02S01B02
+namespace P03S01B02
 
-variable {S T : Set α} 
+variable {S T : Set α}
 
 -- Exercise 2.1
 theorem Subset.antisymm (h₁ : S ⊆ T) (h₂ : T ⊆ S) : S = T := by
@@ -433,5 +432,7 @@ example {R : Set α} (h₁ : R ⊆ S) (h₂ : S ⊆ T) : Tᶜ ⊆ Rᶜ := by
   sorry
 
 -- Exercise 2.10
-example (x : α) (S : Set α) : x ∈ Sᶜ ↔ (x ∈ S → False) := by 
+example (x : α) (S : Set α) : x ∈ Sᶜ ↔ (x ∈ S → False) := by
   sorry
+
+end P03S01B02
