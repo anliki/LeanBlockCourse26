@@ -207,7 +207,7 @@ example (F : Set (Set α)) : (⋂₀ F)ᶜ = ⋃₀ {t | tᶜ ∈ F} := by
       push_neg
       exact hu.right
 
--- Exercise 1.12 (Master)
+-- Exercise 1.12
 example (F G : Set (Set α)) (h₁ : ∀ t ∈ F, ∃ u ∈ G, t ⊆ u) (h₂ : ∃ t ∈ F, ∀ u ∈ G, u ⊆ t) :
     ∃ s, s ∈ F ∩ G := by
   obtain ⟨t, ht₁, ht₂⟩ := h₂
@@ -216,7 +216,7 @@ example (F G : Set (Set α)) (h₁ : ∀ t ∈ F, ∃ u ∈ G, t ⊆ u) (h₂ : 
   have h₂ : t = u := Set.Subset.antisymm hu₂ h₁
   exact ⟨t, ht₁, h₂ ▸ hu₁⟩
 
--- Exercise 1.13 (Master)
+-- Exercise 1.13
 example (F G : Set (Set α)) : (⋃₀ F) ∩ (⋃₀ G)ᶜ ⊆ ⋃₀ (F ∩ Gᶜ) := by
   intro x ⟨⟨t, ht₁, ht₂⟩, h₁⟩
   use t
@@ -230,7 +230,7 @@ example (F G : Set (Set α)) : (⋃₀ F) ∩ (⋃₀ G)ᶜ ⊆ ⋃₀ (F ∩ G�
       exact h₁ t h₂ ht₂
   · exact ht₂
 
--- Exercise 1.14 (Master)
+-- Exercise 1.14
 example (F G : Set (Set α)) (h₁ : ⋃₀ (F ∩ Gᶜ) ⊆ (⋃₀ F) ∩ (⋃₀ G)ᶜ) :
     (⋃₀ F) ∩ (⋃₀ G) ⊆ ⋃₀ (F ∩ G) := by
   intro x ⟨⟨t, ht₁, ht₂⟩, hg⟩
@@ -243,7 +243,7 @@ example (F G : Set (Set α)) (h₁ : ⋃₀ (F ∩ Gᶜ) ⊆ (⋃₀ F) ∩ (⋃
       exact (h₁ this).right hg
   · exact ht₂
 
--- Exercise 1.15 (Master)
+-- Exercise 1.15
 example (F G : Set (Set α)) : (⋃₀ F) ∩ (⋂₀ G)ᶜ ⊆ ⋃₀ {t | ∃ u ∈ F, ∃ v ∈ G, t = u ∩ vᶜ} := by
   intro x ⟨⟨u, hu⟩, h₁⟩
   rw [Set.mem_compl_iff, mem_sInter] at h₁
@@ -259,7 +259,7 @@ example (F G : Set (Set α)) : (⋃₀ F) ∩ (⋂₀ G)ᶜ ⊆ ⋃₀ {t | ∃ 
   · rw [Set.mem_inter_iff, Set.mem_compl_iff]
     exact ⟨hu.right, hv.right⟩
 
--- Exercise 1.16 (Master)
+-- Exercise 1.16
 example (S : Set α) (h₁ : ∀ F, (⋃₀ F = S → S ∈ F)) : ∃ x, S = {x} := by
   have h₂ := h₁ {t | ∃ x ∈ S, t = {x}}
   have h₃ : ⋃₀ {t | ∃ x ∈ S, t = {x}} = S := by 
