@@ -28,6 +28,7 @@ theorem cont_comp_cont {f : X → Y} {g : Y → Z}
 
   exact W_open
 
+-- The same proof, inlining the intermediate names
 example {f : X → Y} {g : Y → Z}
         (f_cont : Continuous f) (g_cont : Continuous g) :
         Continuous (g ∘ f) := by
