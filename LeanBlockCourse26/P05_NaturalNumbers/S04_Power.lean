@@ -351,11 +351,39 @@ Note that a theorem can also be directly tagged when stating!
 -- Exercise 2.1 
 -- Prove once using ony `rw` and `exact` and then once using `simp` 
 example (a b c : MyNat) : (a + b) + (b + c) = (b + b) + (a + c) := by
-  sorry
+  rw [add_assoc, ← add_assoc b, add_comm, add_comm a, ← add_assoc]
+
+-- We can pass the relevant theorems explicitly to `simp` ...
+example (a b c : MyNat) : (a + b) + (b + c) = (b + b) + (a + c) := by
+  simp only [add_comm, add_left_comm]
+
+-- ... but note that we already `@[simp]` tagged these before
+example (a b c : MyNat) : (a + b) + (b + c) = (b + b) + (a + c) := by
+  simp
 
 -- Exercise 2.2
 -- Prove however you like and `#golf`, shortest tactic mode proof wins
+
+-- 19 characters
+#golf example (a b : MyNat) : a * (1 + b) = a + a * b := by
+  rw [mul_add, mul_one]
+
+-- 13 characters
+#golf example (a b : MyNat) : a * (1 + b) = a + a * b := by
+  simp [mul_add]
+
+
+-- Or we cheat for 4 characters by tagging `mul_add` with `simp` ...
+attribute [simp] mul_add
 example (a b : MyNat) : a * (1 + b) = a + a * b := by
-  sorry
+  simp
+
+-- ... or we cheat even more by aliasing `s` for `simp` for 1 character
+syntax "s" : tactic
+macro_rules
+  | `(tactic| s) => `(tactic| simp)
+example (a b : MyNat) : a * (1 + b) = a + a * b := by
+  s
+
 
 end MyNat
