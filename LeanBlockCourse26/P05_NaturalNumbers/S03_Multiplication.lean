@@ -113,4 +113,31 @@ theorem mul_assoc (n m k : MyNat) : (n * m) * k = n * (m * k) := by
   | zero => rw [← zero_zero]; repeat rw [zero_mul, mul_zero]; rw [zero_mul]
   | succ => expose_names; rw [succ_mul, mul_succ, add_mul, mul_add, a_ih]
 
+
+/-
+# Tactic Addendum: `calc`
+=====================
+
+Many of the proofs above were tedious — long `rw` chains rearranging terms
+via associativity and commutativity, with no deep mathematical insight.
+The `calc` tactic can help make such proofs more readable.
+
+A `calc` block chains equalities where each step is justified individually,
+like writing equalities on a blackboard. The `_` on each subsequent line
+stands for the previous line's right-hand side. Each step can be justified
+by a term proof (like `add_assoc a b c`) or by a tactic block (`by rw [...]`).
+-/
+
+theorem add_left_comm (a b c : MyNat) : a + (b + c) = b + (a + c) := by
+  calc a + (b + c)
+      = (a + b) + c := (add_assoc a b c).symm
+    _ = (b + a) + c := by rw [add_comm a b]
+    _ = b + (a + c) := add_assoc b a c
+
+theorem mul_left_comm (a b c : MyNat) : a * (b * c) = b * (a * c) := by
+  calc a * (b * c)
+      = (a * b) * c   := (mul_assoc _ _ _).symm
+    _ = (b * a) * c   := by rw [mul_comm a _]
+    _ = b * (a * c)   := mul_assoc _ _ _
+
 end MyNat
