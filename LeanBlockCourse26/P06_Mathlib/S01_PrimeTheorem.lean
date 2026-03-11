@@ -4,6 +4,7 @@ import Mathlib.Data.Nat.PrimeFin
 import Mathlib.NumberTheory.PrimeCounting
 import Mathlib.SetTheory.Cardinal.Basic
 import Mathlib.Tactic.TFAE
+import Mathlib.NumberTheory.PrimeCounting
 
 /-
 ## Euclid's theorem: there are infinitely many primes
@@ -187,7 +188,13 @@ theorem infinitude_of_primes_tfae : [
 
   tfae_have 1 → 2 := by sorry -- Onat
 
-  tfae_have 1 → 6 := by sorry -- Bohdan
+  tfae_have 1 → 6 := by
+    intro h
+    use Nat.nth Nat.Prime
+    use Nat.nth_injective h
+    intro k
+    exact Nat.prime_nth_prime k
+    -- Bohdan
 
   tfae_have 3 → 2 := by sorry -- Leonie
 
@@ -222,4 +229,3 @@ theorem infinitude_of_primes_tfae : [
   tfae_have 9 → 2 := by sorry
 
   tfae_finish
-
