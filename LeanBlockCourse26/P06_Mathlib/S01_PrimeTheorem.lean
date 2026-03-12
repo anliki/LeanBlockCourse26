@@ -134,7 +134,7 @@ theorem Set.mem_toFinset : a ∈ hs.toFinset ↔ a ∈ s := ...
 ```  
 -/
 
-theorem infinitude_of_primes_tfae {ℵ₀} : [
+theorem infinitude_of_primes_tfae : [
    /-
    **(1) The set of primes is infinite**
    -/
