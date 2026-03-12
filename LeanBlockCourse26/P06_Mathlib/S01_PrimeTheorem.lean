@@ -82,8 +82,21 @@ theorem infinitude_of_primes_tfae : [
   tfae_have 3 → 4 := by sorry -- Alexandra
 
   tfae_have 5 → 4 := by sorry -- Sammy
-  
-  tfae_have 6 → 3 := by sorry -- Anna
+
+  tfae_have 6 → 3 := by
+   intro h
+   rcases h with ⟨P, hP_inj, hP_prime⟩
+   intro S
+   -- die Menge des Bilds von der inj. Fkt P ist unendlich
+   have hR : (Set.range P).Infinite := Set.infinite_range_of_injective hP_inj
+   -- ∃ p ∈ ℕ , p ∈ hR ∧ p ∉ S , weil S endl. hR unendlich
+   obtain ⟨p, hpR, hpS⟩ := Set.Infinite.exists_notMem_finset hR S
+   -- p ∈ hR -> ∃ k ∈ ℕ , p = P k
+   rcases hpR with ⟨k, rfl⟩
+   -- p = P k ist eine Primzahl
+   have g : Nat.Prime (P k) := hP_prime k
+   use (P k)
+
 
   tfae_have 6 → 1 := by sorry -- Alexander
 
