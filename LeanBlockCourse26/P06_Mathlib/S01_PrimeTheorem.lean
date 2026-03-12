@@ -42,7 +42,7 @@ To do this, you should:
 
 (III) Use `exact?` or `simp?` whenever you think you have a nuclear expression that *should*
       be in mathlib to try and find it. Often it is advisable to extract the statement into
-      separate `example` for this. You can also manually search the files, guess the
+      separate `example` for this. You can also manually search the files, guess the 
       expected theorem name based on the [mathlib naming convention](https://leanprover-community.github.io/contribute/naming.html),
       use [leansearch.net](https://leansearch.net) or [Loogle](https://loogle.lean-lang.org),
       talk to people on [Is there code for X? on zulip](https://leanprover.zulipchat.com/#narrow/channel/217875-Is-there-code-for-X.3F/topic/Complexity.20theory/with/578655619)
@@ -185,10 +185,9 @@ theorem infinitude_of_primes_tfae : [
 
   tfae_have 2 → 3 := by sorry -- Arthur
 
-  tfae_have 1 → 2 := by
+  tfae_have 1 → 2 := by -- Onat
    intro h
    exact { not_finite := h }
-   -- Onat
 
   tfae_have 1 → 6 := by sorry -- Bohdan
 
@@ -197,7 +196,7 @@ theorem infinitude_of_primes_tfae : [
   tfae_have 3 → 4 := by sorry -- Alexandra
 
   tfae_have 5 → 4 := by sorry -- Sammy
-
+  
   tfae_have 6 → 3 := by sorry -- Anna
 
   tfae_have 6 → 1 := by sorry -- Alexander
@@ -210,9 +209,9 @@ theorem infinitude_of_primes_tfae : [
 
   tfae_have 3 → 5 := by sorry -- Daniel
 
-  tfae_have 7 → 1 := by sorry -- Bohdan / Kimia
+  tfae_have 7 → 1 := by sorry -- Bohdan
 
-  tfae_have 1 → 7 := by sorry -- Bohdan / Kimia
+  tfae_have 1 → 7 := by sorry -- Bohdan
 
   tfae_have 7 → 3 := by sorry -- Kimia
 
@@ -225,3 +224,4 @@ theorem infinitude_of_primes_tfae : [
   tfae_have 9 → 2 := by sorry
 
   tfae_finish
+
