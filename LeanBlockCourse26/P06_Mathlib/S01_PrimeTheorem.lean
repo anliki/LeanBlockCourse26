@@ -210,7 +210,9 @@ theorem infinitude_of_primes_tfae : [
    use (P k)
 
 
-  tfae_have 6 → 1 := by sorry -- Alexander
+  tfae_have 6 → 1 := by -- Alexander
+   rintro ⟨P, hP, hprime⟩
+   exact Set.infinite_of_injective_forall_mem hP (fun x => hprime x)
 
   tfae_have 4 → 1 := by sorry -- Cara
 
