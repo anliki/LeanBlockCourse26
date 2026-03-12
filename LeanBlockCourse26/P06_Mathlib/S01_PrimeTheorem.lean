@@ -219,7 +219,16 @@ theorem infinitude_of_primes_tfae : [
    have ⟨x, y, z⟩ := h.exists_gt n
    exact ⟨x, z, y⟩
 
-  tfae_have 1 → 3 := by sorry -- Nina
+  tfae_have 1 → 3 := by -- Nina
+    intro P S
+    by_contra
+    push_neg at this
+    have Prime := {p | Nat.Prime p}
+    have p := Set.Infinite.exists_notMem_finset P S
+    obtain ⟨p, pP, pS⟩ := p
+    have not_prime := (this p) pS
+    have pPP : Nat.Prime p := pP
+    exact not_prime pPP
 
   tfae_have 3 → 5 := by sorry -- Daniel
 
