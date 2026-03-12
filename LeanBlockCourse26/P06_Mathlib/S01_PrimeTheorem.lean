@@ -5,6 +5,9 @@ import Mathlib.NumberTheory.PrimeCounting
 import Mathlib.SetTheory.Cardinal.Basic
 import Mathlib.Tactic.TFAE
 
+import Mathlib.Logic.Function.Iterate
+import Mathlib.Order.Monotone.Basic
+
 /-
 ## Euclid's theorem: there are infinitely many primes
 
@@ -181,7 +184,35 @@ theorem infinitude_of_primes_tfae : [
    Cardinal.mk { p : ℕ // p.Prime } = ℵ₀,
   ].TFAE := by
 
-  tfae_have 5 → 6 := by sorry -- Theo
+    tfae_have 5 → 6 := by -- Theo
+      intro h
+      choose P hP using h
+      have ⟨pn, hp⟩ := And.intro (fun n ↦ (hP n).left) fun n ↦ (hP n).right
+
+      let f : ℕ → ℕ := fun n ↦ P^[n+1] 0
+      use f
+
+      have iterate_nfixed (f : ℕ → ℕ) (h : ∀ x, f x > x) (x n : ℕ) : f^[n+1] x > f^[n] x := by
+        rw [Function.iterate_succ']
+        exact h (f^[n] x)
+
+      have hfinc: ∀ (n : ℕ), f (n + 1) > f n := by
+        unfold f
+        intro n
+        exact iterate_nfixed P pn 0 (n+1)
+
+      have hfmon : StrictMono f := by exact strictMono_nat_of_lt_succ hfinc
+
+      have hfinj : Function.Injective f := StrictMono.injective hfmon
+
+      have hfprime (n : ℕ) : Nat.Prime (f n) := by
+        unfold f
+        cases n with
+        | zero => exact hp 0
+        | succ k => rw [Function.iterate_succ']
+                    exact hp (P^[k+1] 0)
+
+      use hfinj
 
   tfae_have 2 → 3 := by sorry -- Arthur
 
