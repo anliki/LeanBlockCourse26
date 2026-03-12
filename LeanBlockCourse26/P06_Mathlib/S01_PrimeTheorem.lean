@@ -42,7 +42,7 @@ To do this, you should:
 
 (III) Use `exact?` or `simp?` whenever you think you have a nuclear expression that *should*
       be in mathlib to try and find it. Often it is advisable to extract the statement into
-      separate `example` for this. You can also manually search the files, guess the
+      separate `example` for this. You can also manually search the files, guess the 
       expected theorem name based on the [mathlib naming convention](https://leanprover-community.github.io/contribute/naming.html),
       use [leansearch.net](https://leansearch.net) or [Loogle](https://loogle.lean-lang.org),
       talk to people on [Is there code for X? on zulip](https://leanprover.zulipchat.com/#narrow/channel/217875-Is-there-code-for-X.3F/topic/Complexity.20theory/with/578655619)
